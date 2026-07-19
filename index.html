@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Yah Boho Spa 🌿✨ | Luxury Massage</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      /* Strictly Monochrome / Colorless UI */
+      --text-primary: #ffffff;
+      --text-secondary: #d0d0d0;
+      --text-muted: #999999;
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+      --shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.4);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Background Image */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://yappiest-crimson-3hppgcmg.edgeone.dev/Uhoo_20260713_235345_0000.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      z-index: -2;
+    }
+
+    /* Dark Overlay to ensure white text is perfectly readable */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .logo:active { transform: scale(0.96); }
+
+    .massage-logo {
+      font-size: 2.2rem;
+      display: inline-block;
+      animation: massageFloat 3s ease-in-out infinite, massageGlow 3s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2));
+      cursor: pointer;
+    }
+
+    @keyframes massageFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(5deg); }
+    }
+
+    @keyframes massageGlow {
+      0%, 100% { filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.2)) brightness(1); }
+      50% { filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.4)) brightness(1.2); }
+    }
+
+    nav { display: flex; gap: 8px; }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 100px;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-primary);
+      background: var(--glass-hover);
+      border-color: var(--glass-border);
+    }
+
+    .nav-link:active { transform: scale(0.95); }
+
+    .page {
+      display: none;
+      animation: fadeInUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+      padding: 40px 0 80px;
+    }
+
+    .page.active-page { display: block; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .haptic-reveal {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .haptic-reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* DRAMATIC Phone Shake Animation - 2 seconds */
+    @keyframes phoneShake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      5% { transform: translate(-4px, 2px) rotate(-0.8deg); }
+      10% { transform: translate(5px, -2px) rotate(0.8deg); }
+      15% { transform: translate(-5px, 3px) rotate(-0.6deg); }
+      20% { transform: translate(4px, -3px) rotate(0.7deg); }
+      25% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+      30% { transform: translate(5px, -2px) rotate(0.6deg); }
+      35% { transform: translate(-4px, 3px) rotate(-0.7deg); }
+      40% { transform: translate(3px, -2px) rotate(0.5deg); }
+      45% { transform: translate(-5px, 2px) rotate(-0.8deg); }
+      50% { transform: translate(4px, -3px) rotate(0.6deg); }
+      55% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+      60% { transform: translate(5px, -2px) rotate(0.7deg); }
+      65% { transform: translate(-4px, 3px) rotate(-0.6deg); }
+      70% { transform: translate(3px, -2px) rotate(0.5deg); }
+      75% { transform: translate(-5px, 2px) rotate(-0.7deg); }
+      80% { transform: translate(4px, -3px) rotate(0.6deg); }
+      85% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+      90% { transform: translate(2px, -1px) rotate(0.3deg); }
+      95% { transform: translate(-1px, 1px) rotate(-0.2deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .phone-shaking {
+      animation: phoneShake 0.13s linear infinite;
+    }
+
+    .hero { text-align: center; padding: 60px 20px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-weight: 300;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 24px;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge:active { transform: scale(0.96); }
+
+    .menu-section { margin-top: 20px; }
+    .menu-category { margin-bottom: 48px; }
+
+    .menu-category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-category-title i { font-size: 1.1rem; color: var(--text-muted); }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      background: var(--glass-hover);
+      margin: 0 -20px;
+      padding: 20px;
+      border-radius: 16px;
+      border-bottom-color: transparent;
+      backdrop-filter: blur(10px);
+    }
+
+    .menu-item:active {
+      transform: scale(0.98);
+      background: var(--glass-hover);
+      margin: 0 -20px;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .menu-item-header::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+      margin: 0 12px;
+      position: relative;
+      top: -6px;
+      opacity: 0.5;
+    }
+
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      padding-right: 8px;
+      z-index: 1;
+    }
+
+    .menu-item-price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: transparent;
+      padding-left: 8px;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .menu-item-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.5;
+      max-width: 90%;
+    }
+
+    .menu-item-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 100px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #e0e0e0;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:active, .btn-secondary:active { transform: translateY(0) scale(0.96); }
+
+    .contact-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 600px;
+      margin: 60px auto 0;
+      transition: var(--transition);
+      backdrop-filter: blur(15px);
+    }
+
+    .contact-card:active { transform: scale(0.98); }
+    .contact-card h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 16px; color: var(--text-primary); }
+    .contact-card p { color: var(--text-secondary); margin-bottom: 32px; }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .contact-details div:active { transform: scale(0.96); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: var(--glass-bg);
+      padding: 32px;
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+      backdrop-filter: blur(15px);
+    }
+
+    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); background: var(--glass-hover); }
+    .feature-card:active { transform: scale(0.97); }
+    .feature-card i { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 16px; transition: var(--transition); }
+    .feature-card:hover i { transform: scale(1.1); color: var(--text-primary); }
+    .feature-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 8px; font-weight: 600; color: var(--text-primary); }
+    .feature-card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      color: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 999;
+      animation: floatBtn 3s ease-in-out infinite;
+      backdrop-filter: blur(10px);
+    }
+
+    .floating-btn:hover {
+      transform: translateX(-50%) translateY(-4px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    .floating-btn:active { transform: translateX(-50%) scale(0.95); }
+
+    @keyframes floatBtn {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-6px); }
+    }
+
+    .notification-toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: rgba(0, 0, 0, 0.85);
+      color: var(--text-primary);
+      padding: 16px 24px;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border: 1px solid var(--glass-border);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      backdrop-filter: blur(15px);
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .nav-container { padding: 12px 16px; }
+      .logo { font-size: 1.2rem; gap: 8px; }
+      .massage-logo { font-size: 1.8rem; }
+      .nav-link { font-size: 0.8rem; padding: 6px 14px; }
+      .menu-item-header::after { display: none; }
+      .menu-item-header { flex-direction: column; gap: 4px; }
+      .menu-item-price { background: transparent !important; padding-left: 0; }
+      .menu-item-name { background: transparent !important; padding-right: 0; }
+      .floating-btn { width: 90%; justify-content: center; bottom: 20px; }
+      .notification-toast { left: 16px; right: 16px; top: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo" data-haptic="light" onclick="switchPage('home'); return false;">
+        <span class="massage-logo">💆‍♀️</span>
+        <span>Yah Boho Spa 🌿</span>
+      </a>
+      <nav>
+        <a href="#" class="nav-link active" data-page="home" data-haptic="light" onclick="switchPage('home'); return false;">🏠 Home</a>
+        <a href="#" class="nav-link" data-page="menu" data-haptic="light" onclick="switchPage('menu'); return false;">📜 Spa Menu</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <div id="home" class="page active-page">
+      <div class="hero">
+        <div class="badge haptic-reveal" data-haptic="light">
+          🌸 Females Only • Mumbai 📍
+        </div>
+        <h1 class="haptic-reveal">Pure Relaxation 🧘‍♀️✨<br>Delivered to You 🏡</h1>
+        <p class="haptic-reveal">Experience luxury 🧴, organic 🌿, and therapeutic home massage services designed exclusively for women. Step into a world of calm 🕊️ and comfort 🛋️.</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" class="haptic-reveal">
+          <a href="#" class="btn-primary" data-haptic="medium" onclick="switchPage('menu'); return false;">
+            📖 View Spa Menu ➡️
+          </a>
+          <a href="#" class="btn-secondary" data-haptic="medium" onclick="openMessenger(); return false;">
+            💬 Book Now 🗓️
+          </a>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card haptic-reveal" data-haptic="light">
+          <i class="fas fa-shield-alt"></i>
+          <h3>🛡️ 100% Safe & Private 🔒</h3>
+          <p>Verified female therapists 👩‍⚕️, strict privacy protocols, and safe home environments 🏡.</p>
+        </div>
+        <div class="feature-card haptic-reveal" data-haptic="light">
+          <i class="fas fa-leaf"></i>
+          <h3>🌿 Organic Products 🧴</h3>
+          <p>We use only premium, chemical-free 🚫, aromatherapy-grade oils and lotions 💧.</p>
+        </div>
+        <div class="feature-card haptic-reveal" data-haptic="light">
+          <i class="fas fa-home"></i>
+          <h3>🏠 Doorstep Luxury 🛋️</h3>
+          <p>No travel needed 🚫🚗. We bring the spa ambiance 🕯️, music 🎵, and comfort to your home.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu" class="page">
+      <div class="hero" style="padding-bottom: 20px;">
+        <div class="badge haptic-reveal" data-haptic="light">
+          📜 Treatment Menu 🌸
+        </div>
+        <h1 class="haptic-reveal">Our Spa Menu 💆‍♀️✨</h1>
+        <p class="haptic-reveal">Curated therapies for deep relaxation 😌, muscle relief 💪, and holistic wellness 🧘‍♀️. All prices are for in-home service 🏡.</p>
+      </div>
+
+      <div class="menu-section">
+        
+        <div class="menu-category haptic-reveal">
+          <h2 class="menu-category-title">
+            🤲 Signature Massages
+          </h2>
+          
+          <div class="menu-item" data-haptic="light">
+            <div class="menu-item-header">
+              <span class="menu-item-name">💆‍♀️ Swedish Relaxation</span>
+              <span class="menu-item-price">₹399</span>
+            </div>
+            <p class="menu-item-desc">A gentle, flowing full-body massage using long strokes to ease muscle tension and promote deep calm 🕊️.</p>
+            <div class="menu-item-meta">
+              <span>⏱️ 45 Mins</span>
+              <span>💧 Organic Oil</span>
+            </div>
+          </div>
+
+          <div class="menu-item" data-haptic="light">
+            <div class="menu-item-header">
+              <span class="menu-item-name">💪 Deep Tissue Therapy</span>
+              <span class="menu-item-price">₹599</span>
+            </div>
+            <p class="menu-item-desc">Focused pressure on deeper layers of muscle and connective tissue, ideal for chronic aches and stiff necks 🎯.</p>
+            <div class="menu-item-meta">
+              <span>⏱️ 60 Mins</span>
+              <span>🔥 Warm Oil</span>
+            </div>
+          </div>
+
+          <div class="menu-item" data-haptic="light">
+            <div class="menu-item-header">
+              <span class="menu-item-name">🌿 Ayurvedic Bliss</span>
+              <span class="menu-item-price">₹499</span>
+            </div>
+            <p class="menu-item-desc">Traditional Indian massage techniques using herbal oils to balance the body's energy and detoxify 🧘‍♀️.</p>
+            <div class="menu-item-meta">
+              <span>⏱️ 50 Mins</span>
+              <span>🍃 Herbal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category haptic-reveal">
+          <h2 class="menu-category-title">
+            💎 Premium Experiences
+          </h2>
+          
+          <div class="menu-item" data-haptic="light">
+            <div class="menu-item-header">
+              <span class="menu-item-name">🪨 Hot Stone Ritual</span>
+              <span class="menu-item-price">₹799</span>
+            </div>
+            <p class="menu-item-desc">Smooth, heated basalt stones are placed on key points of the body to melt away tension and improve circulation 🔥.</p>
+            <div class="menu-item-meta">
+              <span>⏱️ 75 Mins</span>
+              <span>🌡️ Heat Therapy</span>
+            </div>
+          </div>
+
+          <div class="menu-item" data-haptic="light">
+            <div class="menu-item-header">
+              <span class="menu-item-name">🌬️ Boho Aromatherapy</span>
+              <span class="menu-item-price">₹549</span>
+            </div>
+            <p class="menu-item-desc">A sensory journey using custom-blended essential oils (lavender, eucalyptus, or rose) to soothe the mind and body 🌸.</p>
+            <div class="menu-item-meta">
+              <span>⏱️ 60 Mins</span>
+              <span>👃 Aromatherapy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card haptic-reveal">
+          <i class="fab fa-facebook-messenger" style="font-size: 2.5rem; color: var(--text-primary); margin-bottom: 20px;"></i>
+          <h2>💬 Ready to Relax? 🛁</h2>
+          <p>The fastest way to book your session is through Facebook Messenger 📱. Our team typically replies within 15 minutes ⚡.</p>
+          
+          <a href="#" class="btn-primary" data-haptic="medium" onclick="openMessenger(); return false;" style="width: 100%; justify-content: center;">
+            💬 Open Messenger to Book 🗓️
+          </a>
+
+          <div class="contact-details">
+            <div data-haptic="light">
+              ⏰ <span>Available Daily: 9:00 AM – 9:00 PM</span>
+            </div>
+            <div data-haptic="light">
+              📍 <span>Serving: Mumbai, Thane & Navi Mumbai</span>
+            </div>
+            <div data-haptic="light">
+              👩‍⚕️ <span>100% Female Therapists & Staff</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <button class="floating-btn" data-haptic="medium" onclick="openMessenger()">
+    💬 Book on Messenger 📱
+  </button>
+
+  <div id="notificationToast" class="notification-toast">
+    <div class="toast-icon">
+      🤍
+    </div>
+    <div>
+      <div style="font-weight: 600; margin-bottom: 2px;">We love you! 💖✨</div>
+      <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 400;">Thank you for choosing Yah Boho Spa 🌿.</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Yah Boho Spa 🌙 • All rights reserved 🛡️</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;">Designed with purity 🤍 and care. Females only 👩.</p>
+  </footer>
+
+  <script>
+    // ============================================
+    // ACCESSIBILITY CHECK (Reduce Motion API)
+    // ============================================
+    let enabled = true;
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      enabled = false;
+      console.log('🔇 Reduced motion preference detected. Vibrations disabled.');
+    }
+
+    // ============================================
+    // HAPTIC API
+    // ============================================
+    function vibrate(pattern = [25, 40, 25]) {
+      if (!enabled) return;
+      if ("vibrate" in navigator) {
+        try {
+          navigator.vibrate(pattern);
+        } catch (e) {
+          console.log('Vibration not available');
+        }
+      }
+    }
+
+    // UNLOCK vibration with first user gesture (REQUIRED by browsers)
+    let vibrationUnlocked = false;
+    
+    function unlockVibration() {
+      if (!vibrationUnlocked && enabled) {
+        vibrationUnlocked = true;
+        vibrate(20); // Initial unlock tap
+        console.log('✅ Vibration unlocked by user gesture');
+      }
+    }
+    
+    document.addEventListener('touchstart', unlockVibration, { once: true, passive: true });
+    document.addEventListener('click', unlockVibration, { once: true });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('[data-haptic]');
+      if (target) {
+        const type = target.getAttribute('data-haptic');
+        if (type === 'light') vibrate(15);
+        else if (type === 'medium') vibrate([25, 40, 25]);
+        else if (type === 'heavy') vibrate([30, 50, 30]);
+      }
+    });
+
+    // ============================================
+    // 2-SECOND PHONE SHAKE ON SCROLL DOWN
+    // ============================================
+    let hasTriggeredScrollShake = false;
+    let scrollCooldown = false;
+    let lastTouchY = 0;
+    let isTouching = false;
+
+    const twoSecondShakePattern = [];
+    for (let i = 0; i < 13; i++) {
+      twoSecondShakePattern.push(120, 40); 
+    }
+
+    function triggerPhoneShake() {
+      if (!enabled || scrollCooldown) return;
+      
+      scrollCooldown = true;
+      vibrate(twoSecondShakePattern);
+      document.body.classList.add('phone-shaking');
+      
+      setTimeout(() => {
+        document.body.classList.remove('phone-shaking');
+        scrollCooldown = false;
+      }, 2000);
+    }
+
+    document.addEventListener('touchstart', (e) => {
+      isTouching = true;
+      lastTouchY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isTouching) return;
+      
+      const currentY = e.touches[0].clientY;
+      const scrollDistance = Math.abs(currentY - lastTouchY);
+      
+      if (currentY < lastTouchY && scrollDistance > 150 && !hasTriggeredScrollShake) {
+        hasTriggeredScrollShake = true;
+        triggerPhoneShake();
+      }
+      
+      lastTouchY = currentY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => {
+      isTouching = false;
+    }, { passive: true });
+
+    let lastScrollY = 0;
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+      
+      if (currentY > 150 && currentY > lastScrollY && !hasTriggeredScrollShake) {
+        hasTriggeredScrollShake = true;
+        triggerPhoneShake();
+      }
+      
+      lastScrollY = currentY;
+      
+      if (currentY < 50) {
+        hasTriggeredScrollShake = false;
+      }
+    }, { passive: true });
+
+    // ============================================
+    // SCROLL REVEAL ANIMATIONS
+    // ============================================
+    function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.haptic-reveal').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // ============================================
+    // PAGE SWITCHING
+    // ============================================
+    function switchPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active-page');
+      });
+      
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active-page');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        vibrate([25, 40, 25]);
+        setTimeout(initScrollReveal, 100);
+      }
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page === pageId) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // ============================================
+    // MESSENGER
+    // ============================================
+    function openMessenger() {
+      vibrate([30, 40, 30]);
+      const messengerUrl = 'https://m.me/YahBohoSpa'; 
+      window.open(messengerUrl, '_blank');
+    }
+
+    // ============================================
+    // NOTIFICATIONS
+    // ============================================
+    function showNotificationToast() {
+      const toast = document.getElementById('notificationToast');
+      toast.style.display = 'flex';
+      vibrate([15, 30, 15]);
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 6000);
+    }
+
+    function requestPushNotification() {
+      if (!("Notification" in window)) {
+        showNotificationToast();
+        return;
+      }
+
+      if (Notification.permission === "granted") {
+        new Notification("Yah Boho Spa ✨", {
+          body: "We love you! 💖 Thank you for visiting us.",
+          icon: "https://yappiest-crimson-3hppgcmg.edgeone.dev/Uhoo_20260713_235345_0000.png"
+        });
+        showNotificationToast();
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            new Notification("Yah Boho Spa ✨", {
+              body: "We love you! 💖 Your relaxation awaits.",
+              icon: "https://yappiest-crimson-3hppgcmg.edgeone.dev/Uhoo_20260713_235345_0000.png"
+            });
+            showNotificationToast();
+          } else {
+            showNotificationToast();
+          }
+        });
+      } else {
+        showNotificationToast();
+      }
+    }
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    window.addEventListener('load', () => {
+      initScrollReveal();
+      
+      setTimeout(() => {
+        requestPushNotification();
+      }, 2500);
+      
+      let triggered = false;
+      document.body.addEventListener('click', function initNotif() {
+        if (!triggered) {
+          triggered = true;
+          if (Notification.permission === "default") {
+            requestPushNotification();
+          }
+        }
+      }, { once: false });
+    });
+
+    document.querySelector('.floating-btn').addEventListener('click', () => {
+      if (Notification.permission === "granted") {
+        new Notification("Yah Boho Spa 💖", {
+          body: "We love you! 💬 Message us for bliss!",
+        });
+      }
+      showNotificationToast();
+    });
+
+    console.log('✨ Yah Boho Spa: Monochrome UI + Emojis + Custom Background ready! ✨');
+  </script>
+</body>
+</html>
